@@ -1,0 +1,17 @@
+char* longestCommonPrefix(char** strs, int strsSize) {
+    if (strsSize == 0) {
+        return "";
+    }
+    
+    int prefixLen = strlen(strs[0]); // Initialize prefix length with the length of the first string
+    for (int i = 1; i < strsSize; i++) {
+        int j = 0;
+        while (j < prefixLen && strs[0][j] == strs[i][j]) {
+            j++;
+        }
+        prefixLen = j; // Update prefixLen to the new common prefix length found
+    }
+    
+    strs[0][prefixLen] = '\0'; // Terminate the string at the common prefix length
+    return strs[0];
+}
