@@ -1,0 +1,27 @@
+bool isValid(char* s) {
+    int len = strlen(s);
+    if (len % 2 != 0) {
+        return false; // If the length is odd, it can't be valid
+    }
+
+    char stack[len];
+    int top = -1;
+
+    for (int i = 0; i < len; i++) {
+        if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
+            stack[++top] = s[i]; // Push opening brackets onto the stack
+        } else {
+            if (top == -1) {
+                return false; // If there's no opening bracket, it's invalid
+            }
+            if ((s[i] == ')' && stack[top] != '(') ||
+                (s[i] == ']' && stack[top] != '[') ||
+                (s[i] == '}' && stack[top] != '{')) {
+                return false; // Mismatched brackets
+            }
+            top--; // Matched, so remove from stack
+        }
+    }
+
+    return top == -1;
+}
